@@ -7,9 +7,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "backend.py"
-    }
+    { "source": "/(.*)", "destination": "backend.py" }
   ]
 }
