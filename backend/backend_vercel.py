@@ -59,4 +59,5 @@ async def process_query(request: QueryRequest):
         
         return {"answer": response.choices[0].message.content}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+            print(f"Error: {str(e)}") # Ye Vercel logs mein dikhega
+            return {"answer": f"Backend Error: {str(e)}", "sources": []}
