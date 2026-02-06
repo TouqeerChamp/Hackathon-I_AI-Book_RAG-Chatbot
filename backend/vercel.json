@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "backend.py" }
-  ],
-  "functions": {
-    "backend.py": {
-      "runtime": "python@3.11"
+  "builds": [
+    {
+      "src": "backend.py",
+      "use": "@vercel/python"
     }
-  }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "backend.py"
+    }
+  ]
 }
