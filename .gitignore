@@ -11,3 +11,4 @@ venv/
 # Build folders
 build/
 .docusaurus/
+.vercel
