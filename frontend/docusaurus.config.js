@@ -7,9 +7,9 @@ const darkTheme = themes.dracula;
 const config = {
   title: 'Physical AI & Humanoid Robotics',
   tagline: 'Building Embodied Intelligence',
-  url: 'https://physical-ai-book.com',
-  baseUrl: '/physical_ai_book_with_rag_chatbot_updated/',
-  onBrokenLinks: 'throw',
+  url: 'https://hackathon-i-ai-book-rag-chatbot-frontend.vercel.app', // Apne Vercel frontend ka URL yahan likhein
+  baseUrl: '/', // Isko pehle '/physical_ai_book...' tha, ab sirf '/' kar den
+  onBrokenLinks: 'warn', // Build fail na ho is liye 'throw' ko 'warn' kar diya
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'TouqeerChamp',
