@@ -40,15 +40,24 @@ async def process_query(request: QueryRequest):
             model="sentence-transformers/all-MiniLM-L6-v2"
         )
         
-        # List conversion for Qdrant
-        vector = embeddings[0] if isinstance(embeddings[0], list) else embeddings.tolist() if hasattr(embeddings, 'tolist') else embeddings
+        # Vector format setting
+        vector = embeddings[0] if isinstance(embeddings[0], list) else (embeddings.tolist() if hasattr(embeddings, 'tolist') else embeddings)
 
-        # Step 2: Search in Qdrant (Method fix)
-        search_result = qdrant_client.search(
-            collection_name="humanoid_robotics",
-            query_vector=vector,
-            limit=3
-        )
+        # Step 2: Search in Qdrant with Version Safety
+        try:
+            # Puraani library version ke liye
+            search_result = qdrant_client.search(
+                collection_name="humanoid_robotics",
+                query_vector=vector,
+                limit=3
+            )
+        except AttributeError:
+            # Nayi library version (v1.10+) ke liye
+            search_result = qdrant_client.query_points(
+                collection_name="humanoid_robotics",
+                query_vector=vector,
+                limit=3
+            ).points
         
         # Extract context safely
         context = "\n".join([res.payload.get("text", "") for res in search_result if res.payload])
@@ -64,5 +73,5 @@ async def process_query(request: QueryRequest):
         return {"answer": response.choices[0].message.content}
         
     except Exception as e:
-        print(f"Error: {str(e)}") # Vercel logs ke liye
+        print(f"Error logic: {str(e)}") 
         return {"answer": f"Backend Error: {str(e)}", "sources": []}
