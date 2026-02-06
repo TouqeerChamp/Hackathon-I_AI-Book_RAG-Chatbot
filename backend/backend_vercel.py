@@ -44,7 +44,6 @@ async def process_query(request: QueryRequest):
         vector = embeddings[0] if isinstance(embeddings[0], list) else (embeddings.tolist() if hasattr(embeddings, 'tolist') else embeddings)
 
         # Step 2: Search in Qdrant with Version Safety
-        # Step 2: Search in Qdrant with Version Safety
         try:
             # Method 1: Purani library (v1.7 - v1.9)
             search_result = qdrant_client.search(
@@ -56,13 +55,7 @@ async def process_query(request: QueryRequest):
             # Method 2: Nayi library (v1.10+) - Parameter name is 'query'
             search_result = qdrant_client.query_points(
                 collection_name="humanoid_robotics",
-                query=vector,  # Yahan 'query_vector' ki bajaye sirf 'query' hoga
-                limit=3
-            ).points
-            # Nayi library version (v1.10+) ke liye
-            search_result = qdrant_client.query_points(
-                collection_name="humanoid_robotics",
-                query_vector=vector,
+                query=vector, # Yahan sirf 'query' hona chahiye
                 limit=3
             ).points
         
