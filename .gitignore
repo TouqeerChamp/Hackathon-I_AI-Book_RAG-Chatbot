@@ -1,0 +1,13 @@
+# Sensitive files
+.env
+backend/.env
+frontend/.env
+.env.local
+
+# Dependency folders
+node_modules/
+venv/
+
+# Build folders
+build/
+.docusaurus/

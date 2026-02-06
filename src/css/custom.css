@@ -1,0 +1,74 @@
+/* Custom.css - Physical AI Theme */
+
+:root {
+  /* Neon Green & Dark Theme Palette */
+  --ifm-color-primary: #00e676;
+  --ifm-color-primary-dark: #00c464;
+  --ifm-color-primary-darker: #00a353;
+  --ifm-color-primary-darkest: #006131;
+  --ifm-color-primary-light: #33eb91;
+  --ifm-color-primary-lighter: #66f0ad;
+  --ifm-color-primary-lightest: #99f5c8;
+}
+
+/* Dark Mode Tweaks (Recommended View) */
+[data-theme='dark'] {
+  --ifm-background-color: #0a0b10;
+  --ifm-navbar-background-color: #0f111a;
+  --ifm-menu-color: #e0e0e0;
+}
+
+/* Navbar Styling */
+.navbar {
+  box-shadow: 0 1px 10px rgba(0, 230, 118, 0.1);
+  border-bottom: 1px solid #1f2937;
+}
+
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* Hero Section (Home Page) */
+.hero {
+  background: linear-gradient(135deg, #0a0b10 0%, #111827 100%);
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 4rem;
+  background: -webkit-linear-gradient(0deg, #ffffff, #00e676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+}
+
+/* Buttons */
+.button--primary {
+  background-color: transparent;
+  border: 2px solid #00e676;
+  color: #00e676;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  background-color: #00e676;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Cards on Homepage (if any) */
+.card {
+  border: 1px solid #1f2937;
+  background-color: #111827;
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #00e676;
+}

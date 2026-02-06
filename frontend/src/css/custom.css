@@ -1,0 +1,115 @@
+/* Custom.css - Physical AI Theme */
+
+:root {
+  /* Neon Green & Dark Theme Palette */
+  --ifm-color-primary: #00e676;
+  --ifm-color-primary-dark: #00c464;
+  --ifm-color-primary-darker: #00a353;
+  --ifm-color-primary-darkest: #006131;
+  --ifm-color-primary-light: #33eb91;
+  --ifm-color-primary-lighter: #66f0ad;
+  --ifm-color-primary-lightest: #99f5c8;
+}
+
+/* Dark Mode Tweaks (Recommended View) */
+[data-theme='dark'] {
+  --ifm-background-color: #0a0b10;
+  --ifm-navbar-background-color: #0f111a;
+  --ifm-menu-color: #e0e0e0;
+}
+
+/* Navbar Styling */
+.navbar {
+  box-shadow: 0 1px 10px rgba(0, 230, 118, 0.1);
+  border-bottom: 1px solid #1f2937;
+}
+
+.navbar__title {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* Hero Section (Home Page) */
+.hero {
+  background: linear-gradient(135deg, #0a0b10 0%, #111827 100%);
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 4rem;
+  background: -webkit-linear-gradient(0deg, #ffffff, #00e676);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
+}
+
+/* Buttons */
+.button--primary {
+  background-color: transparent;
+  border: 2px solid #00e676;
+  color: #00e676;
+  border-radius: 50px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  background-color: #00e676;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Cards on Homepage (if any) */
+.card {
+  border: 1px solid #1f2937;
+  background-color: #111827;
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #00e676;
+}
+
+/* Custom CSS for RAG Chatbot Readability */
+.chat-container {
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid var(--ifm-color-emphasis-300);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the main chat window has a light, contrasting background */
+.chat-messages {
+    background-color: var(--ifm-background-color); /* Use Docusaurus primary background */
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* User's message styling */
+.user-message {
+    text-align: right;
+    color: var(--ifm-color-white); /* White text */
+    background-color: var(--ifm-color-primary-dark); /* Dark primary color background */
+    padding: 8px 12px;
+    border-radius: 18px 18px 0 18px;
+    margin-bottom: 10px;
+    display: inline-block;
+    max-width: 80%;
+}
+
+/* Bot's response styling (important for readability) */
+.bot-response {
+    text-align: left;
+    color: var(--ifm-font-color-base); /* Darker text for light background */
+    background-color: var(--ifm-color-emphasis-100); /* Very light background for contrast */
+    padding: 10px 15px;
+    border-radius: 18px 18px 18px 0;
+    margin-bottom: 10px;
+    display: inline-block;
+    max-width: 80%;
+}

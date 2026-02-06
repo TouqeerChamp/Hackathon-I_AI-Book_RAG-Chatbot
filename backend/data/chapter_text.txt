@@ -1,0 +1,9 @@
+# Chapter 1: Introduction to Humanoid Robotics
+
+Humanoid robotics is an interdisciplinary field focusing on creating robots with a body structure similar to that of a human. These robots are designed to interact with human environments, requiring complex systems for balance, locomotion, and sophisticated perception.
+
+## 1.1 Balance and Locomotion
+A key challenge is the Zero Moment Point (ZMP) control, which ensures the robot maintains stability while walking or performing tasks. Modern research often utilizes advanced deep reinforcement learning (DRL) techniques to train bipedal gaits.
+
+## 1.2 Perception and Interaction
+For effective interaction, humanoids rely on advanced computer vision and tactile sensors. The robot must perceive human cues and environmental changes in real-time. The ultimate goal is to achieve seamless physical collaboration (physical AI).

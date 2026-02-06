@@ -1,0 +1,190 @@
+/* Updated styles for the chat widget with Panaversity official colors (darker shades) */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.chat-toggle-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background-color: #1b5e20;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-window {
+  width: 400px;
+  height: 550px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.chat-header {
+  background-color: #1b5e20;
+  color: white;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.message {
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  max-width: 85%;
+  word-wrap: break-word;
+  line-height: 1.5;
+  font-size: 14px;
+  border: 1px solid #4caf50;
+}
+
+.message.user {
+  background-color: #c8e6c9;
+  color: #1b5e20;
+  margin-left: auto;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.message.bot {
+  background-color: white;
+  color: #333;
+  margin-right: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #4caf50;
+  align-self: flex-start;
+}
+
+.answer {
+  margin-bottom: 12px;
+}
+
+.sources-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.sources-section strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #1b5e20;
+  font-size: 13px;
+}
+
+.source-item {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background-color: #c8e6c9;
+  border-radius: 8px;
+  border-left: 3px solid #4caf50;
+}
+
+.source-text {
+  display: block;
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.source-meta {
+  font-size: 11px;
+  color: #777;
+}
+
+.thinking {
+  color: #666;
+  font-style: italic;
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #eee;
+  background-color: white;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #4caf50;
+  border-radius: 24px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  border-color: #1b5e20;
+  box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.2);
+}
+
+.send-button {
+  margin-left: 10px;
+  padding: 12px 20px;
+  background-color: #1b5e20;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  min-width: 70px;
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: #2e7d32;
+}
+
+.send-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
