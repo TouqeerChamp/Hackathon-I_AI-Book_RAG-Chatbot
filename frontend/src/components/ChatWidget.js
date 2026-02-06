@@ -25,12 +25,17 @@ const handleSendMessage = async () => {
 
     try {
         // Sahi URL aur Port: 8000
-        const response = await fetch('http://127.0.0.1:8000/api/query', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            // Backend "question" mang raha hai
-            body: JSON.stringify({ question: queryToSend }), 
-        });
+// Check karein ke frontend local par chal raha hai ya internet par
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:8000/api/query'  // Local Backend
+    : 'https://hackathon-i-ai-book-rag-chatbotfinal.vercel.app/api/query'; // Vercel Backend
+
+const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    // Backend jo field mang raha hai (query ya question), wo yahan likhein
+    body: JSON.stringify({ query: queryToSend }), 
+});
 
         const data = await response.json();
         
