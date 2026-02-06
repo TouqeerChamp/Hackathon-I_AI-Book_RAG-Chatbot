@@ -1,5 +1,8 @@
 {
-  "rewrite": [{ "source": "/(.*)", "destination": "backend.py" }],
+  "version": 2,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "backend.py" }
+  ],
   "functions": {
     "backend.py": {
       "runtime": "python@3.11"
