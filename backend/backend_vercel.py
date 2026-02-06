@@ -40,14 +40,18 @@ async def process_query(request: QueryRequest):
             model="sentence-transformers/all-MiniLM-L6-v2"
         )
         
-        # Step 2: Search in Qdrant
+        # List conversion for Qdrant
+        vector = embeddings[0] if isinstance(embeddings[0], list) else embeddings.tolist() if hasattr(embeddings, 'tolist') else embeddings
+
+        # Step 2: Search in Qdrant (Method fix)
         search_result = qdrant_client.search(
             collection_name="humanoid_robotics",
-            query_vector=embeddings[0] if isinstance(embeddings[0], list) else embeddings,
+            query_vector=vector,
             limit=3
         )
         
-        context = "\n".join([res.payload.get("text", "") for res in search_result])
+        # Extract context safely
+        context = "\n".join([res.payload.get("text", "") for res in search_result if res.payload])
         
         # Step 3: Get Answer from AI Model
         prompt = f"Context: {context}\n\nQuestion: {request.query}\n\nAnswer:"
@@ -58,6 +62,7 @@ async def process_query(request: QueryRequest):
         )
         
         return {"answer": response.choices[0].message.content}
+        
     except Exception as e:
-            print(f"Error: {str(e)}") # Ye Vercel logs mein dikhega
-            return {"answer": f"Backend Error: {str(e)}", "sources": []}
+        print(f"Error: {str(e)}") # Vercel logs ke liye
+        return {"answer": f"Backend Error: {str(e)}", "sources": []}
