@@ -2,11 +2,11 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend.py",
+      "src": "backend_vercel.py",
       "use": "@vercel/python"
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "backend.py" }
+    { "source": "/(.*)", "destination": "backend_vercel.py" }
   ]
 }
