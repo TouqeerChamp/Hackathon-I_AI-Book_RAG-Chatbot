@@ -18,8 +18,10 @@ from dotenv import load_dotenv
 
 
 
+
 load_dotenv()
 
+# Create the FastAPI app
 app = FastAPI()
 
 
@@ -37,17 +39,23 @@ app.add_middleware(
 )
 
 
+# Initialize clients but defer error handling to the request level
+HF_API_TOKEN = os.getenv("HF_API_TOKEN")
+QDRANT_URL = os.getenv("QDRANT_URL")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
 
-hf_client = InferenceClient(token=os.getenv("HF_API_TOKEN"))
+# Initialize clients globally but handle missing env vars gracefully
+hf_client = InferenceClient(token=HF_API_TOKEN) if HF_API_TOKEN else None
+qdrant_client_inst = None
 
-qdrant_client_inst = QdrantClient(
+if QDRANT_URL and QDRANT_API_KEY:
+    qdrant_client_inst = QdrantClient(
 
-    url=os.getenv("QDRANT_URL"),
+        url=QDRANT_URL,
 
-    api_key=os.getenv("QDRANT_API_KEY")
+        api_key=QDRANT_API_KEY
 
-)
-
+    )
 
 
 class QueryRequest(BaseModel):
@@ -55,7 +63,7 @@ class QueryRequest(BaseModel):
     query: str
 
 
-@app.get("/")
+@app.get("")
 def home():
     return {"message": "Vercel Backend is Live!"}
 
@@ -65,12 +73,18 @@ def home():
 async def process_query(request: QueryRequest):
 
     try:
+        # Check if required clients are initialized
+        if not hf_client:
+            return {"answer": "Backend Error: HF client not initialized. Missing HF_API_TOKEN.", "sources": []}
+        
+        if not qdrant_client_inst:
+            return {"answer": "Backend Error: Qdrant client not initialized. Missing QDRANT_URL or QDRANT_API_KEY.", "sources": []}
 
         # Step 1: Embeddings
 
         embeddings = hf_client.feature_extraction(
 
-            request.query, 
+            request.query,
 
             model="sentence-transformers/all-MiniLM-L6-v2"
 
@@ -108,17 +122,17 @@ async def process_query(request: QueryRequest):
 
             )
 
-        
+
 
         context = "\n".join([res.payload.get("text", "") for res in search_result if res.payload])
 
-        
+
 
         # Step 3: Powerful Free AI Model (Mistral-7B)
 
         prompt = f"Context: {context}\n\nQuestion: {request.query}\n\nAnswer concisely based on context:"
 
-        
+
 
         # text_generation zyada stable hai free tier par
 
@@ -136,11 +150,11 @@ async def process_query(request: QueryRequest):
 
         )
 
-        
+
 
         return {"answer": response}
 
-        
+
 
     except Exception as e:
 
