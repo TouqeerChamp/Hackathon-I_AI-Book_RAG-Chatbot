@@ -66,8 +66,7 @@ async def process_query(request: QueryRequest):
         prompt = f"Context: {context}\n\nQuestion: {request.query}\n\nAnswer:"
         response = hf_client.chat_completion(
             messages=[{"role": "user", "content": prompt}],
-            max_tokens=500,
-            model="HuggingFaceH4/zephyr-7b-beta"
+            max_tokens=500
         )
         
         return {"answer": response.choices[0].message.content}
