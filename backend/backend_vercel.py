@@ -65,6 +65,7 @@ async def process_query(request: QueryRequest):
         # Step 3: Get Answer from AI Model
         prompt = f"Context: {context}\n\nQuestion: {request.query}\n\nAnswer:"
         response = hf_client.text_generation(
+            model="gpt2",
             prompt=prompt,
             max_new_tokens=250,
             temperature=0.7,
