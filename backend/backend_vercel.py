@@ -1,6 +1,3 @@
-# Copyright (c) Touqeer. All rights reserved.
-# Licensed under the MIT License.
-
 import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -47,21 +44,15 @@ async def process_query(request: QueryRequest):
         vector = embeddings[0] if isinstance(embeddings[0], list) else (embeddings.tolist() if hasattr(embeddings, 'tolist') else embeddings)
 
         # Step 2: Search in Qdrant with Version Safety
-        import qdrant_client
-        from packaging import version
-        
-        # Check Qdrant client version to determine method and parameters
-        client_version = version.parse(qdrant_client.__version__)
-        
-        if client_version >= version.parse("1.10.0"):
-            # Newer versions use query_points with 'query' parameter
+        # Attempt to use the newer query_points method first (for v1.10+)
+        try:
             search_result = qdrant_client.query_points(
                 collection_name="humanoid_robotics",
                 query=vector,
                 limit=3
             ).points
-        else:
-            # Older versions use search with 'query_vector' parameter
+        except AttributeError:
+            # Fall back to the older search method (for v1.9 and below)
             search_result = qdrant_client.search(
                 collection_name="humanoid_robotics",
                 query_vector=vector,
