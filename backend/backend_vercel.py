@@ -64,12 +64,14 @@ async def process_query(request: QueryRequest):
 
         # Step 3: Get Answer from AI Model
         prompt = f"Context: {context}\n\nQuestion: {request.query}\n\nAnswer:"
-        response = hf_client.chat_completion(
-            messages=[{"role": "user", "content": prompt}],
-            max_tokens=500
+        response = hf_client.text_generation(
+            prompt=prompt,
+            max_new_tokens=250,
+            temperature=0.7,
+            return_full_text=False
         )
         
-        return {"answer": response.choices[0].message.content}
+        return {"answer": response}
 
     except Exception as e:
         print(f"Error logic: {str(e)}")
